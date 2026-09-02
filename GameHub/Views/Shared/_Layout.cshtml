@@ -3,48 +3,75 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GameHub</title>
+    <title>@ViewData["Title"] - The best marketplace for buying and selling games directly with trusted sellers.</title>
     <script type="importmap"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/GameHub.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GameHub</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <header class="sticky top-0 z-50">
+        <nav class="sticky top-0 bg-white/80 backdrop-blur-lg z-50 py-2.5 border-b border-black/10 relative">
+            <div class="max-w-screen-xl mx-auto flex items-center px-4 gap-3 sm:gap-4">
+
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="shrink-0 flex items-center">
+                    <img src="/logo.svg" class="h-9 sm:h-12 w-auto object-contain" alt="GameHub" />
+                </a>
+
+                <div class="flex-1 relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-4 w-4 sm:h-5 sm:w-5 text-neutral-400 absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2">
+                        <path d="M21 21l-4.35-4.35M17 10.5A6.5 6.5 0 1 1 4 10.5a6.5 6.5 0 0 1 13 0Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <input type="text" placeholder="Search for games on gamehub..." class="pl-9 sm:pl-11 pr-4 sm:pr-5 py-2.5 sm:py-3.5 w-full text-sm bg-neutral-100 rounded-full outline-none focus:bg-white focus:ring-1 focus:ring-black/20 transition" />
+                </div>
+
+                <div class="hidden sm:flex gap-4 items-center shrink-0 whitespace-nowrap">
+                    <a asp-controller="Auth" asp-action="Login" class="text-sm font-semibold text-neutral-900 px-2 py-2 rounded-full hover:text-neutral-500 transition">
+                        Log in
+                    </a>
+                    <a asp-controller="Auth" asp-action="Register" class="text-sm font-semibold text-white bg-black px-4 py-2 rounded-full hover:bg-neutral-800 transition">
+                        Sign up
+                    </a>
+                </div>
+
+                <div class="flex sm:hidden shrink-0 items-center gap-1">
+                    <button type="button" id="navToggleBtn" class="p-2 inline-flex items-center justify-center rounded-lg text-neutral-600 hover:bg-neutral-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-6 w-6">
+                            <path d="M4 6h16M4 12h16M4 18h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="navMobilePanel" class="hidden sm:hidden absolute left-0 right-0 top-full bg-white border-t border-black/10 px-4 pt-4 pb-5 space-y-2.5">
+                    <a asp-controller="Auth" asp-action="Login" class="block text-center text-sm font-semibold text-neutral-900 border border-neutral-200 rounded-full px-4 py-3 hover:bg-neutral-50">
+                        Log in
+                    </a>
+                    <a asp-controller="Auth" asp-action="Register" class="block text-center text-sm font-semibold text-white bg-black rounded-full px-5 py-3 hover:bg-neutral-800">
+                        Sign up
+                    </a>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top border-b border-black/10 footer text-muted">
         <div class="container">
-            &copy; 2026 - GameHub - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - GameHub
         </div>
     </footer>
+
+    <script>document.getElementById('navToggleBtn').addEventListener('click', function() { document.getElementById('navMobilePanel').classList.toggle('hidden'); });</script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
