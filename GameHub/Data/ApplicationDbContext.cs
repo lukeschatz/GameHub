@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using GameHub.Models;
 
 namespace GameHub.Data
 {
@@ -9,5 +10,7 @@ namespace GameHub.Data
             : base(options)
         {
         }
+
+        public DbSet<Order> Orders { get; set; }
     }
 }

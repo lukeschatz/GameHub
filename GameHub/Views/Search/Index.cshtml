@@ -1,3 +1,36 @@
 ﻿@{
     ViewData["Title"] = "Search";
 }
+
+@model IEnumerable<GameHub.Models.Order>
+
+<section class="flex min-h-[calc(100vh-64px)] items-center justify-center py-16">
+    <div class="max-w-5xl w-full rounded-2xl px-8 bg-white">
+
+        <div class="pt-10 pb-6">
+            <h1 class="text-gray-900 text-2xl font-medium">Search listings</h1>
+        </div>
+
+        @if (!Model.Any()) {
+            <p class="text-gray-500 text-sm pb-10">No listings found, try diffrent keywords.</p>
+        }
+        else {
+            <div class="pb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach (var item in Model) {
+                    <div class="flex flex-col justify-between bg-white border border-gray-300/80 rounded-2xl px-6 py-5">
+                        <div class="min-w-0">
+                            <p class="text-gray-900 font-medium truncate">@item.Title</p>
+                            <p class="text-gray-500 text-sm mt-1.5">@(item.Body.Length > 120 ? item.Body.Substring(0, 120) + "..." : item.Body)</p>
+                            <p class="text-gray-400 text-xs mt-2">Seller: @(item.User?.UserName ?? "Unknown")</p>
+                        </div>
+                        <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id"
+                           class="mt-4 h-11 rounded-full text-white bg-black hover:opacity-90 transition-opacity text-sm font-medium flex items-center justify-center">
+                            View Listing
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+</section>

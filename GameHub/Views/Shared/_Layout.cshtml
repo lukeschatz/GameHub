@@ -19,20 +19,21 @@
                     <img src="/logo.svg" class="h-9 sm:h-12 w-auto object-contain" alt="GameHub" />
                 </a>
 
-                <div class="flex-1 relative">
+                <form asp-controller="Search" asp-action="Index" method="get" class="flex-1 relative">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-4 w-4 sm:h-5 sm:w-5 text-neutral-400 absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2">
                         <path d="M21 21l-4.35-4.35M17 10.5A6.5 6.5 0 1 1 4 10.5a6.5 6.5 0 0 1 13 0Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <input type="text" placeholder="Search for games on gamehub..." class="pl-9 sm:pl-11 pr-4 sm:pr-5 py-2.5 sm:py-3.5 w-full text-sm bg-neutral-100 rounded-full outline-none focus:bg-white focus:ring-1 focus:ring-black/20 transition" />
-                </div>
+                    <input type="text" name="q" placeholder="Search for games on gamehub..." class="pl-9 sm:pl-11 pr-4 sm:pr-5 py-2.5 sm:py-3.5 w-full text-sm bg-neutral-100 rounded-full outline-none focus:bg-white focus:ring-1 focus:ring-black/20 transition" />
+                </form>
 
                 <div class="hidden sm:flex gap-4 items-center shrink-0 whitespace-nowrap">
-                    <a asp-controller="Auth" asp-action="Login" class="text-sm font-semibold text-neutral-900 px-2 py-2 rounded-full hover:text-neutral-500 transition">
-                        Log in
-                    </a>
-                    <a asp-controller="Auth" asp-action="Register" class="text-sm font-semibold text-white bg-black px-4 py-2 rounded-full hover:bg-neutral-800 transition">
-                        Sign up
-                    </a>
+                    @if (User.Identity != null && User.Identity.IsAuthenticated) {
+                        <a asp-controller="Orders" asp-action="Index" class="text-sm text-neutral-900 px-2 py-2 rounded-full hover:text-neutral-500 transition">Selling</a>
+                        <a asp-controller="Account" asp-action="Index" class="text-sm text-neutral-900 px-2 py-2 rounded-full hover:text-neutral-500 transition">Profile</a>
+                    } else {
+                        <a asp-controller="Auth" asp-action="Login" class="text-sm text-neutral-900 px-2 py-2 rounded-full hover:text-neutral-500 transition">Log in</a>
+                        <a asp-controller="Auth" asp-action="Register" class="text-sm text-white bg-black px-4 py-2 rounded-full hover:bg-neutral-800 transition">Sign up</a>
+                    }
                 </div>
 
                 <div class="flex sm:hidden shrink-0 items-center gap-1">
@@ -44,12 +45,12 @@
                 </div>
 
                 <div id="navMobilePanel" class="hidden sm:hidden absolute left-0 right-0 top-full bg-white border-t border-black/10 px-4 pt-4 pb-5 space-y-2.5">
-                    <a asp-controller="Auth" asp-action="Login" class="block text-center text-sm font-semibold text-neutral-900 border border-neutral-200 rounded-full px-4 py-3 hover:bg-neutral-50">
-                        Log in
-                    </a>
-                    <a asp-controller="Auth" asp-action="Register" class="block text-center text-sm font-semibold text-white bg-black rounded-full px-5 py-3 hover:bg-neutral-800">
-                        Sign up
-                    </a>
+                    @if (User.Identity != null && User.Identity.IsAuthenticated) {
+                        <a asp-controller="Account" asp-action="Index" class="block text-center text-sm font-semibold text-neutral-900 border border-neutral-200 rounded-full px-4 py-3 hover:bg-neutral-50">Account</a>
+                    } else {
+                        <a asp-controller="Auth" asp-action="Login" class="block text-center text-sm font-semibold text-neutral-900 border border-neutral-200 rounded-full px-4 py-3 hover:bg-neutral-50">Log in</a>
+                        <a asp-controller="Auth" asp-action="Register" class="block text-center text-sm font-semibold text-white bg-black rounded-full px-5 py-3 hover:bg-neutral-800">Sign up</a>
+                    }
                 </div>
             </div>
         </nav>
@@ -57,7 +58,7 @@
 
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            @RenderBody()           
         </main>
     </div>
 

@@ -1,0 +1,14 @@
+﻿@model GameHub.Models.Order
+
+<h2>Delete Listing</h2>
+
+<p><strong>Are you sure you want to delete this listing?</strong> This action cannot be undone.</p>
+
+<h5>@Model.Title</h5>
+<p>@Model.Body</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Confirm Delete</button>
+    <a asp-action="Index">Cancel</a>
+</form>
