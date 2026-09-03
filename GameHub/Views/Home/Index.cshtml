@@ -4,6 +4,20 @@
 
 @model (List<GameHub.Models.Order> Latest, List<GameHub.Models.Order> Oldest)
 
+@{
+    ViewData["Title"] = "Gamehub";
+}
+   <!-- Hero Section --> 
+   <section class="container-fluid bg-dark text-white text-center py-5">
+    <div class="container"> <h1 class="display-4 fw-bold">Welcome to GameHub</h1> 
+        <p class="lead"> Open your mind and discover a new world. 
+
+        </p> 
+        
+    </div> 
+        
+    
+    </section>
 <h3>Latest Listed</h3>
 <a asp-controller="Search" asp-action="Index">View All</a>
 
