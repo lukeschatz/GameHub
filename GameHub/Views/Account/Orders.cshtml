@@ -1,3 +1,39 @@
 ﻿@{
     ViewData["Title"] = "Account orders";
 }
+
+@model IEnumerable<GameHub.Models.Order>
+
+<section class="flex min-h-[calc(100vh-64px)] items-center justify-center py-16">
+    <div class="max-w-3xl w-full rounded-2xl px-8 bg-white">
+
+        <div class="pt-10 pb-6">
+            <h1 class="text-gray-900 text-2xl font-medium">My Purchased Orders</h1>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <p class="text-gray-500 text-sm pb-10">You havent brought any accounts.</p>
+        }
+        else
+        {
+            <div class="pb-10 space-y-3">
+                @foreach (var item in Model)
+                {
+                    <div class="flex items-center justify-between w-full bg-white border border-gray-300/80 rounded-2xl px-6 py-4 gap-4">
+                        <div class="min-w-0">
+                            <p class="text-gray-900 font-medium truncate">@item.Title</p>
+                            <p class="text-gray-500 text-sm truncate">Seller: @(item.User?.UserName ?? "Unknown")</p>
+                            <p class="text-gray-500 text-sm truncate">@item.AccountInfoPrivate</p>
+                        </div>
+                        <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id"
+                           class="h-11 px-4 rounded-full text-white bg-black hover:opacity-90 transition-opacity text-sm font-medium flex items-center shrink-0">
+                            View Account Information
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+</section>

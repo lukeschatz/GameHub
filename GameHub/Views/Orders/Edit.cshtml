@@ -1,3 +1,38 @@
 ﻿@{
     ViewData["Title"] = "Edit listing";
 }
+
+@model GameHub.Models.Order
+
+<h2>Edit Listing</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+
+    <div>
+        <label asp-for="Body">Public Description</label>
+        <textarea asp-for="Body" rows="4"></textarea>
+        <span asp-validation-for="Body"></span>
+    </div>
+
+    <div>
+        <label asp-for="AccountInfoPrivate">Private Buyer Data</label>
+        <textarea asp-for="AccountInfoPrivate" rows="3"></textarea>
+        <span asp-validation-for="AccountInfoPrivate"></span>
+    </div>
+
+    <div>
+        <input asp-for="Sold" />
+        <label asp-for="Sold">Mark as Sold</label>
+    </div>
+
+    <button type="submit">Update Listing</button>
+    <a asp-action="Index">Cancel</a>
+</form>

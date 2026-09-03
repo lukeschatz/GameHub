@@ -1,3 +1,56 @@
-﻿@{
+﻿@model GameHub.Models.Order
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+
+@{
     ViewData["Title"] = "Purchase";
+    var currentUserId = UserManager.GetUserId(User);
+    bool isOwner = currentUserId == Model.UserId;
 }
+
+<section class="flex min-h-[calc(100vh-64px)] items-center justify-center py-16">
+    <div class="max-w-96 w-full border border-gray-300/60 rounded-2xl px-8 bg-white">
+
+        @if (TempData["SuccessMessage"] != null) {
+            <p class="text-green-600 text-sm pt-6">@TempData["SuccessMessage"]</p>
+        }
+        @if (TempData["ErrorMessage"] != null) {
+            <p class="text-red-500 text-sm pt-6">@TempData["ErrorMessage"]</p>
+        }
+
+        <div class="pt-10 pb-2">
+            <h1 class="text-gray-900 text-2xl font-medium">@Model.Title</h1>
+            <p class="text-gray-500 text-sm mt-1">@(Model.Sold ? "Sold" : "Available")</p>
+        </div>
+
+        <div class="mt-6">
+            <p class="text-gray-400 text-xs font-medium mb-1.5">Description</p>
+            <p class="text-gray-700 text-sm">@Model.Body</p>
+        </div>
+
+        <div class="mt-6">
+            <p class="text-gray-400 text-xs font-medium mb-1.5">Listed by</p>
+            <p class="text-gray-700 text-sm">@(Model.User?.UserName ?? "Unknown")</p>
+        </div>
+
+        <div class="mt-8 pb-10">
+            @if (Model.Sold) {
+                <p class="text-gray-400 text-xs font-medium mb-1.5">Private Account Info</p>
+                <p class="text-gray-700 text-sm">@Model.AccountInfoPrivate</p>
+            } 
+            else {
+                @if (User.Identity != null && User.Identity.IsAuthenticated) {
+                    @if (!isOwner) {
+                        <form asp-controller="Purchase" asp-action="Complete" asp-route-id="@Model.Id" method="post" id="purchase-form">
+                            <button type="submit" class="w-full h-11 rounded-full text-white bg-black hover:opacity-90 transition-opacity text-sm font-medium">Purchase Now</button>
+                        </form>
+                    }
+                } 
+                else {
+                    <a asp-controller="Auth" asp-action="Login" class="block text-center w-full h-11 leading-[44px] rounded-full text-white bg-black hover:opacity-90 transition-opacity text-sm font-medium">Log in to Purchase</a>
+                }
+            }
+        </div>
+
+    </div>
+</section>

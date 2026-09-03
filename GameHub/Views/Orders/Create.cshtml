@@ -1,3 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Create listing";
 }
+
+@model GameHub.Models.Order
+
+<h2>Create Listing</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+
+    <div>
+        <label asp-for="Body">Public Description</label>
+        <textarea asp-for="Body" rows="4"></textarea>
+        <span asp-validation-for="Body"></span>
+    </div>
+
+    <div>
+        <label asp-for="AccountInfoPrivate">Private Buyer Data (Keys/Credentials)</label>
+        <textarea asp-for="AccountInfoPrivate" rows="3"></textarea>
+        <span asp-validation-for="AccountInfoPrivate"></span>
+    </div>
+
+    <button type="submit">Save Listing</button>
+    <a asp-action="Index">Cancel</a>
+</form>

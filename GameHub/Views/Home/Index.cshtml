@@ -2,7 +2,44 @@
     ViewData["Title"] = "Gamehub";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model (List<GameHub.Models.Order> Latest, List<GameHub.Models.Order> Oldest)
+
+<h3>Latest Listed</h3>
+<a asp-controller="Search" asp-action="Index">View All</a>
+
+@if (!Model.Latest.Any())
+{
+    <p>No listings available.</p>
+}
+else
+{
+    @foreach (var item in Model.Latest)
+    {
+        <div>
+            <h5>@item.Title</h5>
+            <p>@(item.Body.Length > 80 ? item.Body.Substring(0, 80) + "..." : item.Body)</p>
+            <p>@item.CreatedAt.ToLocalTime().ToString("MMM d, yyyy")</p>
+            <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id">View</a>
+        </div>
+    }
+}
+
+<h3>Oldest Listed</h3>
+<a asp-controller="Search" asp-action="Index">View All</a>
+
+@if (!Model.Oldest.Any())
+{
+    <p>No listings available.</p>
+}
+else
+{
+    @foreach (var item in Model.Oldest)
+    {
+        <div>
+            <h5>@item.Title</h5>
+            <p>@(item.Body.Length > 80 ? item.Body.Substring(0, 80) + "..." : item.Body)</p>
+            <p>@item.CreatedAt.ToLocalTime().ToString("MMM d, yyyy")</p>
+            <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id">View</a>
+        </div>
+    }
+}
