@@ -4,42 +4,54 @@
 
 @model (List<GameHub.Models.Order> Latest, List<GameHub.Models.Order> Oldest)
 
-<h3>Latest Listed</h3>
-<a asp-controller="Search" asp-action="Index">View All</a>
+<section class="w-full bg-white border-1 mt-12 rounded-2xl px-8 py-20">
+    <div class="max-w-5xl mx-auto text-center">
+        <h1 class="text-4xl text-black font-medium">Buy and sell game accounts securely.</h1>
+        <p class="text-gray-400 text-sm mt-3">Browse listings from trusted sellers or list your own in minutes.</p>
+        <a asp-controller="Search" asp-action="Index" class="inline-block mt-8 h-11 px-6 text-black bg-white hover:text-gray-400 transition text-sm font-medium">View All Listings</a>
+    </div>
+</section>
 
-@if (!Model.Latest.Any())
-{
-    <p>No listings available.</p>
-}
-else
-{
-    @foreach (var item in Model.Latest)
-    {
-        <div>
-            <h5>@item.Title</h5>
-            <p>@(item.Body.Length > 80 ? item.Body.Substring(0, 80) + "..." : item.Body)</p>
-            <p>@item.CreatedAt.ToLocalTime().ToString("MMM d, yyyy")</p>
-            <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id">View</a>
-        </div>
-    }
-}
+<section class="min-h-[calc(100vh-64px)] px-8 py-12">
+    <div class="max-w-5xl mx-auto">
 
-<h3>Oldest Listed</h3>
-<a asp-controller="Search" asp-action="Index">View All</a>
+        <h1 class="text-gray-900 text-2xl font-medium">Latest Listed</h1>
+        @if (!Model.Latest.Any()) {
+            <p class="text-gray-500 text-sm mt-10">No listings available.</p>
+        }
+        else {
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach (var item in Model.Latest) {
+                    <div class="flex flex-col justify-between bg-white border border-gray-300/80 rounded-2xl px-4 py-4">
+                        <div class="min-w-0">
+                            <p class="text-gray-900 font-medium truncate">@item.Title</p>
+                            <p class="text-gray-500 text-sm mt-1.5">@(item.Body.Length > 120 ? item.Body.Substring(0, 120) + "..." : item.Body)</p>
+                            <p class="text-gray-400 text-xs mt-2">Seller: @(item.User?.UserName ?? "Unknown")</p>
+                        </div>
+                        <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id" class="mt-4 h-11 rounded-full text-white bg-black hover:opacity-90 transition-opacity text-sm font-medium flex items-center justify-center">View Listing</a>
+                    </div>
+                }
+            </div>
+        }
 
-@if (!Model.Oldest.Any())
-{
-    <p>No listings available.</p>
-}
-else
-{
-    @foreach (var item in Model.Oldest)
-    {
-        <div>
-            <h5>@item.Title</h5>
-            <p>@(item.Body.Length > 80 ? item.Body.Substring(0, 80) + "..." : item.Body)</p>
-            <p>@item.CreatedAt.ToLocalTime().ToString("MMM d, yyyy")</p>
-            <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id">View</a>
-        </div>
-    }
-}
+        <h1 class="mt-16 text-gray-900 text-2xl font-medium">Oldest Listed</h1>
+        @if (!Model.Oldest.Any()) {
+            <p class="text-gray-500 text-sm mt-10">No listings available.</p>
+        }
+        else {
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach (var item in Model.Oldest) {
+                    <div class="flex flex-col justify-between bg-white border border-gray-300/80 rounded-2xl px-4 py-4">
+                        <div class="min-w-0">
+                            <p class="text-gray-900 font-medium truncate">@item.Title</p>
+                            <p class="text-gray-500 text-sm mt-1.5">@(item.Body.Length > 120 ? item.Body.Substring(0, 120) + "..." : item.Body)</p>
+                            <p class="text-gray-400 text-xs mt-2">Seller: @(item.User?.UserName ?? "Unknown")</p>
+                        </div>
+                        <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id" class="mt-4 h-11 rounded-full text-white bg-black hover:opacity-90 transition-opacity text-sm font-medium flex items-center justify-center">View Listing</a>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+</section>
