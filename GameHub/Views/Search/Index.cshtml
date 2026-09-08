@@ -4,32 +4,85 @@
 
 @model IEnumerable<GameHub.Models.Order>
 
-<section class="flex min-h-[calc(100vh-64px)] items-center justify-center py-16">
-    <div class="max-w-5xl w-full rounded-2xl px-8 bg-white">
+@{
+    int currentPage = ViewBag.CurrentPage;
+    int totalPages = ViewBag.TotalPages;
+    string? currentQuery = ViewBag.CurrentQuery;
+}
 
-        <div class="pt-10 pb-6">
-            <h1 class="text-gray-900 text-2xl font-medium">Search listings</h1>
-        </div>
+<section class="min-h-[calc(100vh-64px)] px-8 py-12">
+    <div class="max-w-5xl mx-auto">
 
-        @if (!Model.Any()) {
-            <p class="text-gray-500 text-sm pb-10">No listings found, try diffrent keywords.</p>
+        <h1 class="text-gray-900 text-2xl font-medium">Search listings</h1>
+
+        @if (!Model.Any())
+        {
+            <p class="text-gray-500 text-sm mt-10">No listings found, try diffrent keywords.</p>
         }
-        else {
-            <div class="pb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                @foreach (var item in Model) {
-                    <div class="flex flex-col justify-between bg-white border border-gray-300/80 rounded-2xl px-6 py-5">
+        else
+        {
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach (var item in Model)
+                {
+                    <div class="flex flex-col justify-between bg-white border border-gray-300/80 rounded-2xl px-4 py-4">
                         <div class="min-w-0">
                             <p class="text-gray-900 font-medium truncate">@item.Title</p>
                             <p class="text-gray-500 text-sm mt-1.5">@(item.Body.Length > 120 ? item.Body.Substring(0, 120) + "..." : item.Body)</p>
                             <p class="text-gray-400 text-xs mt-2">Seller: @(item.User?.UserName ?? "Unknown")</p>
                         </div>
-                        <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id"
-                           class="mt-4 h-11 rounded-full text-white bg-black hover:opacity-90 transition-opacity text-sm font-medium flex items-center justify-center">
-                            View Listing
-                        </a>
+                        <a asp-controller="Purchase" asp-action="Index" asp-route-id="@item.Id" class="mt-4 h-11 rounded-full text-white bg-black hover:opacity-90 transition-opacity text-sm font-medium flex items-center justify-center">View Listing</a>
                     </div>
                 }
             </div>
+
+            @if (totalPages > 1)
+            {
+                <div class="mt-10 flex items-center justify-center gap-4">
+
+                    @if (currentPage > 1)
+                    {
+                        <a asp-action="Index"
+                           asp-route-q="@currentQuery"
+                           asp-route-page="@(currentPage - 1)"
+                           class="h-10 w-10 rounded-full bg-black text-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="h-10 w-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center cursor-not-allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </span>
+                    }
+
+                    <span class="text-gray-500 text-sm font-medium">@currentPage/@totalPages</span>
+
+                    @if (currentPage < totalPages)
+                    {
+                        <a asp-action="Index"
+                           asp-route-q="@currentQuery"
+                           asp-route-page="@(currentPage + 1)"
+                           class="h-10 w-10 rounded-full bg-black text-white flex items-center justify-center hover:opacity-90 transition-opacity">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="h-10 w-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center cursor-not-allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </span>
+                    }
+
+                </div>
+            }
         }
 
     </div>
