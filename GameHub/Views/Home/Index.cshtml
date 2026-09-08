@@ -4,12 +4,25 @@
 
 @model (List<GameHub.Models.Order> Latest, List<GameHub.Models.Order> Oldest)
 
+
+   <section class="container-fluid bg-dark text-white text-center py-5">
+    <div class="container"> <h1 class="display-4 fw-bold">Welcome to GameHub</h1> 
+        <p class="lead"> Open your mind and discover a new world. 
+
+        </p> 
+        
+    </div> 
+        
+    
+    </section>
+<h3>Latest Listed</h3>
+<a asp-controller="Search" asp-action="Index">View All</a>
+
 <section class="w-full bg-image border-1 mt-12 rounded-2xl px-8 py-20">
     <div class="max-w-5xl mx-auto text-center">
         <h1 class="text-4xl text-white font-medium">
             Buy and sell game accounts securely.
         </h1>
-
         <p class="text-gray-200 text-sm mt-3">
             Browse listings from trusted sellers or list your own in minutes.
         </p>
