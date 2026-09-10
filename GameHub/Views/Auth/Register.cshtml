@@ -5,9 +5,9 @@
 @model GameHub.Models.RegisterViewModel
 
 <section class="flex min-h-[calc(100vh-64px)] items-center justify-center">
-    <form asp-controller="Auth" asp-action="Register" method="post" class="max-w-96 w-full text-center border border-gray-300/60 rounded-2xl px-8 bg-white">
+    <form asp-controller="Auth" asp-action="Register" method="post" class="max-w-96 w-full text-center border border-gray-300/60 rounded-2xl px-8 bg-red-600">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <h1 class="text-gray-900 text-3xl mt-10 font-medium">Register</h1>
+        <h1 class="text-white text-3xl mt-10 font-medium">Register</h1>
         <p class="text-gray-500 text-sm mt-2">Create an account with us!</p>
         <div class="flex items-center w-full mt-10 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
             <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,6 +33,6 @@
         <button type="submit" class="mt-6 w-full h-11 rounded-full text-white bg-black hover:opacity-90 transition-opacity">
             Sign up
         </button>
-        <p class="text-black text-sm mt-3 mb-11">Allready have an account? <a class="text-black-50" asp-controller="Auth" asp-action="Login">Login</a></p>
+        <p class="text-black text-sm mt-3 mb-11">Allready have an account? <a class="text-black" asp-controller="Auth" asp-action="Login">Login</a></p>
     </form>
 </section>
