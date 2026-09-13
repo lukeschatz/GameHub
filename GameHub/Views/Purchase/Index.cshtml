@@ -9,7 +9,7 @@
 }
 
 <section class="flex min-h-[calc(100vh-64px)] items-center justify-center py-16">
-    <div class="max-w-96 w-full border border-gray-300/60 rounded-2xl px-8 bg-white">
+    <div class="max-w-96 w-full border border-gray-300/60 rounded-2xl px-8 bg-orange-400">
 
         @if (TempData["SuccessMessage"] != null) {
             <p class="text-green-600 text-sm pt-6">@TempData["SuccessMessage"]</p>
@@ -19,18 +19,18 @@
         }
 
         <div class="pt-10 pb-2">
-            <h1 class="text-gray-900 text-2xl font-medium">@Model.Title</h1>
-            <p class="text-gray-500 text-sm mt-1">@(Model.Sold ? "Sold" : "Available")</p>
+            <h1 class="text-white text-2xl font-medium">@Model.Title</h1>
+            <p class="text-white text-sm mt-1">@(Model.Sold ? "Sold" : "Available")</p>
         </div>
 
         <div class="mt-6">
-            <p class="text-gray-400 text-xs font-medium mb-1.5">Description</p>
-            <p class="text-gray-700 text-sm">@Model.Body</p>
+            <p class="text-white text-xs font-medium mb-1.5">Description</p>
+            <p class="text-white text-sm">@Model.Body</p>
         </div>
 
         <div class="mt-6">
-            <p class="text-gray-400 text-xs font-medium mb-1.5">Listed by</p>
-            <p class="text-gray-700 text-sm">@(Model.User?.UserName ?? "Unknown")</p>
+            <p class="text-white text-xs font-medium mb-1.5">Listed by</p>
+            <p class="text-white text-sm">@(Model.User?.UserName ?? "Unknown")</p>
         </div>
 
         <div class="mt-8 pb-10">
