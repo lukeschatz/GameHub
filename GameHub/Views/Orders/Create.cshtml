@@ -5,14 +5,14 @@
 @model GameHub.Models.Order
 
 <section class="flex min-h-[calc(100vh-64px)] items-center justify-center">
-    <form asp-action="Create" method="post" class="max-w-96 w-full px-8 py-10 bg-white">
+    <form asp-action="Create" method="post" class="max-w-96 w-full px-8 py-10 bg-orange-400">
         <div asp-validation-summary="All" class="text-red-500 text-sm mb-4"></div>
 
-        <h1 class="text-gray-900 text-2xl font-medium">Create Listing</h1>
-        <p class="text-gray-500 text-sm mt-1">List an account for sale</p>
+        <h1 class="text-black text-2xl font-medium">Create Listing</h1>
+        <p class="text-black text-sm mt-1">List an account for sale</p>
 
         <div class="mt-8">
-            <label asp-for="Title" class="block text-xs font-medium text-gray-400 mb-1.5"></label>
+            <label asp-for="Title" class="block text-xs font-medium text-white mb-1.5"></label>
             <div class="flex items-center w-full bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden px-6">
                 <input asp-for="Title" class="bg-transparent text-gray-700 placeholder-gray-500 outline-none text-sm w-full h-full" />
             </div>
@@ -20,13 +20,13 @@
         </div>
 
         <div class="mt-5">
-            <label asp-for="Body" class="block text-xs font-medium text-gray-400 mb-1.5">Public Description</label>
+            <label asp-for="Body" class="block text-xs font-medium text-white mb-1.5">Public Description</label>
             <textarea asp-for="Body" rows="4" class="w-full bg-white border border-gray-300/80 rounded-2xl px-6 py-3 text-sm text-gray-700 placeholder-gray-500 outline-none resize-none"></textarea>
             <span asp-validation-for="Body" class="text-red-500 text-xs mt-1 block"></span>
         </div>
 
         <div class="mt-5">
-            <label asp-for="AccountInfoPrivate" class="block text-xs font-medium text-gray-400 mb-1.5">Private Buyer Data (Keys/Credentials)</label>
+            <label asp-for="AccountInfoPrivate" class="block text-xs font-medium text-white mb-1.5">Private Buyer Data (Keys/Credentials)</label>
             <textarea asp-for="AccountInfoPrivate" rows="3" class="w-full bg-white border border-gray-300/80 rounded-2xl px-6 py-3 text-sm text-gray-700 placeholder-gray-500 outline-none resize-none"></textarea>
             <span asp-validation-for="AccountInfoPrivate" class="text-red-500 text-xs mt-1 block"></span>
         </div>
