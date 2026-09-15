@@ -33,3 +33,19 @@ body {
 .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+
+.my-bg {
+    background-image: url('/Banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 350px;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
